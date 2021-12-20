@@ -1,5 +1,5 @@
-#ifndef __RESULT_H__
-#define __RESULT_H__
+#ifndef RESULT_HPP
+#define RESULT_HPP
 
 #include <exception>
 
@@ -10,7 +10,7 @@ namespace Utilis
     template <typename T>
     class Result
     {
-    private:
+        public:
         bool isSuccess;
         T data;
         std::exception e;
@@ -28,8 +28,6 @@ namespace Utilis
 
         ~Result();
 
-        bool getIsSuccess() const { return isSuccess; }
-        void setIsSuccess(bool isSuccess_) { isSuccess = isSuccess_; }
 
         T getData() const { return data; }
         void setData(const T &data_) { data = data_; }
@@ -118,4 +116,4 @@ namespace Utilis
 
 } // namespace Utilis
 
-#endif // __RESULT_H__
+#endif // RESULT_HPP
