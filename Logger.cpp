@@ -25,7 +25,7 @@ Level Logger::getLevel() const { return this->LoggerLevel; }
 
 string Logger::levelToString(Level level) const { return levelMap.at(level); }
 
-short Logger::setFile(const string& fileName, bool deleteFile, const std::experimental::source_location location)
+short Logger::setFile(const string& fileName, bool deleteFile, const std::source_location location)
 {
     if (this->LoggingFileStream.is_open()) {
         this->LoggingFileStream.close();
@@ -45,7 +45,7 @@ short Logger::setFile(const string& fileName, bool deleteFile, const std::experi
 }
 
 short Logger::setFile(
-    const string& fileName, ofstream::openmode mode, bool deleteFile, const std::experimental::source_location location)
+    const string& fileName, ofstream::openmode mode, bool deleteFile, const std::source_location location)
 {
     if (this->LoggingFileStream.is_open()) {
         this->LoggingFileStream.close();
@@ -63,7 +63,7 @@ short Logger::setFile(
     return 0;
 }
 
-void Logger::write(Level level, const char* message, const std::experimental::source_location location)
+void Logger::write(Level level, const char* message, const std::source_location location)
 {
     // Only log if we're at or above the pre-defined severity
     if (level < this->LoggerLevel) {
@@ -116,7 +116,7 @@ void Logger::write(Level level, const char* message, const std::experimental::so
     }
 }
 
-char* Logger::getLoggerfunctionInfo(Level level, const std::experimental::source_location location)
+char* Logger::getLoggerfunctionInfo(Level level, const std::source_location location)
 {
     size_t offset = 0;
     size_t fullSize = 0;
