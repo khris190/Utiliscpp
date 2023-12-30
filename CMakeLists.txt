@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.27.0)
-project(MY_UTILS LANGUAGES CXX VERSION 1.1.5)
+project(MY_UTILS LANGUAGES CXX VERSION 1.2.0)
 
 file(GLOB INCLUDES
     *.hpp
