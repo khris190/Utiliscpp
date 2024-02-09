@@ -3,7 +3,6 @@
 #include <ctime>
 #include <fcntl.h>
 #include <iostream>
-#include <sys/mman.h>
 #include <sys/time.h>
 #include <unistd.h>
 
@@ -34,7 +33,7 @@ std::string Profiler::getTimingsAsString(bool doClearSamples)
 {
     std::string retString = "";
 #ifdef DEBUG
-    retString = "DEBUG TIMINGS!!!\n ";
+    retString = "DEBUG TIMINGS!!!\n";
 #endif
 
     std::vector<Sample> localSamples = getTimings(doClearSamples);
@@ -106,11 +105,11 @@ Profiler* Profiler::instance_;
 PTimer::PTimer(const std::string& name)
 {
     sample.name = name;
-    startTime = std::chrono::system_clock::now();
+    startTime = std::chrono::high_resolution_clock::now();
 }
 
 PTimer::~PTimer()
 {
-    sample.nsTime = std::chrono::duration<long, std::nano>(std::chrono::system_clock::now() - startTime).count();
+    sample.nsTime = std::chrono::duration<long, std::nano>(std::chrono::high_resolution_clock::now() - startTime).count();
     Profiler::getInstance()->AddSample(sample);
 }

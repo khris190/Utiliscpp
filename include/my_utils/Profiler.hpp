@@ -1,6 +1,7 @@
 #ifndef PROFILER_HPP
 #define PROFILER_HPP
 
+#include <chrono>
 #include <mutex>
 #include <string>
 #include <vector>
@@ -41,15 +42,19 @@ public:
     void printProfilerData(bool doClearSamples = true);
 };
 
+// use for acurate creation to block end timing cant be used in return scope //TODO deal with that problem
 #define TOKENPASTE(x, y) x##y
 #define TOKENPASTE2(x, y) TOKENPASTE(x, y)
-// use for acurate creation to block end timing cant be used in return scope //TODO deal with that problem
-#define newTimer(name) PTimer TOKENPASTE2(Timer_, __LINE__) = PTimer(name)
+#define newTimer(name) PTimer TOKENPASTE2(Timer_, __COUNTER__) = PTimer(name)
 // use by throwing newTimer({string name}) into code block, it will measure to the end of a block
 class PTimer {
 private:
     Sample sample;
-    std::chrono::_V2::system_clock::time_point startTime;
+#ifdef APPLE
+    std::chrono::high_resolution_clock::time_point startTime;
+#else
+    std::chrono::_V2::high_resolution_clock::time_point startTime;
+#endif // APPLE
 
 public:
     explicit PTimer(const std::string& name);
