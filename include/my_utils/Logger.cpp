@@ -25,6 +25,9 @@ string Logger::levelToString(Level level) const { return levelMap.at(level); }
 
 short Logger::setFile(const string& fileName, bool deleteFile, const std::experimental::source_location location)
 {
+    if (!(this->LoggerTarget & (short)Target::LOG_FILE)) {
+        this->xorTarget(Target::LOG_FILE);
+    }
     if (this->LoggingFileStream.is_open()) {
         this->LoggingFileStream.close();
     }
