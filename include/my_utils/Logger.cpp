@@ -118,6 +118,9 @@ char* Logger::getLoggerfunctionInfo(Level level, const std::experimental::source
 {
     size_t offset = 0;
     size_t fullSize = 0;
+    timeString[0] = 0;
+    levelString[0] = 0;
+    fileString[0] = 0;
     // Append the current date and time if enabled
     if (this->timestampEnabled) {
         if (std::time_t time = system_clock::to_time_t(system_clock::now()); this->lastTime < time) {
